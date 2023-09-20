@@ -78,3 +78,15 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/* custom */
+
+body {
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+header {
+  padding: 48px;
+  background: url("./images/bg_img.png");
+}
