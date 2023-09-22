@@ -109,6 +109,7 @@ header > p {
 ul {
   list-style: none;
   padding: 48px;
+  font-family: "Smythe", cursive;
 }
 
 li {
@@ -119,11 +120,19 @@ li {
 }
 
 .add-item-btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5rem;
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: none;
+  color: #3c3c3c;
+  border: 1px solid #dedede;
   cursor: pointer;
+  background-color: white;
+}
+
+.icon {
+  font-size: 78px;
 }
 
 .item-desc {
@@ -132,6 +141,6 @@ li {
   gap: 16px;
 }
 
-.icon {
-  font-size: 78px;
+.item-price {
+  font-weight: bold;
 }
