@@ -89,6 +89,21 @@ body {
 header {
   padding: 48px;
   background: url("./images/bg_img.png");
+  height: 160px;
+}
+
+header > h1,
+header > p {
+  font-family: "Smythe", cursive;
+  color: white;
+}
+
+header > h1 {
+  font-size: 2.4rem;
+}
+
+header > p {
+  font-size: 1.2rem;
 }
 
 ul {
