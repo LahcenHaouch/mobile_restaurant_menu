@@ -50,7 +50,6 @@ menu.addEventListener("click", (event) => {
 });
 
 function renderCart() {
-  console.log(cart);
   if (!cart.length) {
     orderSection.innerHTML = "";
     return;
@@ -83,11 +82,10 @@ function renderCart() {
   `;
 
   orderSection.innerHTML = `
-    <div id="order-section">
       <h2>Your order</h2>
       <ul id="summary">${summary}</ul>
       <div id="total-price">${totalPrice}</div>
-    </div>
+      <button class="complete-order-btn">Complete order</button>
   `;
 }
 
