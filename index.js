@@ -1,7 +1,8 @@
 import { menuItems } from "./data.js";
 
 const menu = document.querySelector("#menu");
-const summary = document.querySelector("#summary");
+const orderSection = document.querySelector("#order-section");
+
 let cart = [];
 
 menu.innerHTML = menuItems.reduce((acc, current) => {
@@ -49,11 +50,16 @@ menu.addEventListener("click", (event) => {
 });
 
 function renderCart() {
+  console.log(cart);
   if (!cart.length) {
-    summary.innerHTML = "";
+    orderSection.innerHTML = "";
+    return;
   }
 
-  summary.innerHTML = cart.reduce((acc, current) => {
+  let total = 0;
+
+  const summary = cart.reduce((acc, current) => {
+    total += current.total * current.price;
     const totalItemPriceIfMulti =
       current.total > 1 ? ` ($${current.price * current.total})` : "";
 
@@ -61,18 +67,31 @@ function renderCart() {
       acc +
       `
       <li>
-         <div>
-            <p>${current.name}</p>
-            <button id="remove-${current.id}">remove</button>
+         <div class="item-name-remove">
+            <p class="cart-item-name">${current.name}</p>
+            <button class="remove-item-btn" id="remove-${current.id}">remove</button>
          </div>
-         <p>$${current.price} X ${current.total}${totalItemPriceIfMulti}</p>
+         <p class="cart-item-price">$${current.price} X ${current.total}${totalItemPriceIfMulti}</p>
       </li>
     `
     );
   }, "");
+
+  const totalPrice = `
+    <p class="total-price-label">Total price:</p>
+    <p class="total-price-value" id="total">$${total}</p>
+  `;
+
+  orderSection.innerHTML = `
+    <div id="order-section">
+      <h2>Your order</h2>
+      <ul id="summary">${summary}</ul>
+      <div id="total-price">${totalPrice}</div>
+    </div>
+  `;
 }
 
-summary.addEventListener("click", (event) => {
+orderSection.addEventListener("click", (event) => {
   const { id } = event.target;
   if (!id.includes("remove-")) {
     return;

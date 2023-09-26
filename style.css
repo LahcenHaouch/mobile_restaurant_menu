@@ -106,17 +106,35 @@ header > p {
   font-size: 1.2rem;
 }
 
-ul {
+#menu,
+#summary {
   list-style: none;
-  padding: 48px;
   font-family: "Smythe", cursive;
 }
 
-li {
+#menu {
+  padding: 48px;
+}
+
+#menu > li {
   margin-bottom: 48px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+#summary > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#summary {
+  padding: 0;
+  padding-bottom: 16px;
+  margin-inline: 48px;
+  margin-bottom: 16px;
+  border-bottom: solid;
 }
 
 .add-item-btn {
@@ -145,6 +163,43 @@ li {
   font-weight: bold;
 }
 
-.order-section > h2 {
+#order-section > h2 {
   text-align: center;
+  padding-inline: 48px;
+}
+
+.cart-item-name {
+  font-size: 1.75rem;
+}
+
+.cart-item-price {
+  font-size: 1.25rem;
+}
+
+.item-name-remove {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.remove-item-btn {
+  border: none;
+  cursor: pointer;
+  color: #bbbbbb;
+  background-color: white;
+}
+
+#total-price {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 48px;
+  font-family: "Smythe", cursive;
+}
+
+.total-price-label {
+  font-size: 1.75rem;
+}
+
+.total-price-value {
+  font-size: 1.25rem;
 }
