@@ -2,6 +2,8 @@ import { menuItems } from "./data.js";
 
 const menu = document.querySelector("#menu");
 const orderSection = document.querySelector("#order-section");
+const cardDetailsModal = document.querySelector("#modal");
+const mainContent = document.querySelector("#main-content");
 
 let cart = [];
 
@@ -85,26 +87,70 @@ function renderCart() {
       <h2>Your order</h2>
       <ul id="summary">${summary}</ul>
       <div id="total-price">${totalPrice}</div>
-      <button class="complete-order-btn">Complete order</button>
+      <button id="complete-order" class="complete-order-btn">Complete order</button>
   `;
 }
 
 orderSection.addEventListener("click", (event) => {
   const { id } = event.target;
-  if (!id.includes("remove-")) {
+
+  const isRemoveEvent = id.includes("remove-");
+  const isCompleteOrderEvent = id === "complete-order";
+
+  if (!isRemoveEvent && !isCompleteOrderEvent) {
     return;
   }
 
-  const [, removeBtnId] = id.split("-");
-  const idToRemove = Number.parseInt(removeBtnId, 10);
+  if (isRemoveEvent) {
+    const [, removeBtnId] = id.split("-");
+    const idToRemove = Number.parseInt(removeBtnId, 10);
 
-  const itemToRemove = cart.find(({ id }) => id === idToRemove);
+    const itemToRemove = cart.find(({ id }) => id === idToRemove);
 
-  if (itemToRemove && itemToRemove.total > 1) {
-    itemToRemove.total--;
-  } else {
-    cart = cart.filter(({ id }) => id !== idToRemove);
+    if (itemToRemove && itemToRemove.total > 1) {
+      itemToRemove.total--;
+    } else {
+      cart = cart.filter(({ id }) => id !== idToRemove);
+    }
+  }
+
+  if (isCompleteOrderEvent) {
+    cardDetailsModal.innerHTML = `
+    <div id="card-details-modal">
+      <h2>Enter card details</h2>
+      <form>
+        <input type="text" name="name" id="name" placeholder="Enter your name" required />
+        <input
+          type="text"
+          name="card-number"
+          id="card-number"
+          placeholder="Enter card number" required
+        />
+        <input type="text" name="cvv" id="cvv" placeholder="Enter CVV" required />
+        <button type="submit" class="complete-order-btn">Pay</button>
+      </form>
+    </div>
+    `;
+
+    mainContent.style.opacity = 0.3;
   }
 
   renderCart();
+});
+
+cardDetailsModal.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formEl = document.querySelector("#card-details-modal > form");
+
+  const formData = new FormData(formEl);
+
+  cart.length = 0;
+  mainContent.style.opacity = 1;
+  cardDetailsModal.innerHTML = "";
+  orderSection.innerHTML = `
+    <p class="order-result">Thanks ${formData.get(
+      "name"
+    )}! Your order is on its way!</p>
+  `;
 });

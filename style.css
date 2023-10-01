@@ -216,4 +216,43 @@ header > p {
   padding-block: 16px;
   display: block;
   width: 100%;
+  cursor: pointer;
+}
+
+#card-details-modal {
+  position: fixed;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  height: 440px;
+  width: 524px;
+  padding: 30px 24px;
+  border: 1px solid #757575;
+  border-radius: 3px;
+}
+#card-details-modal > h2 {
+  text-align: center;
+  margin-bottom: 46px;
+}
+
+#card-details-modal input {
+  display: block;
+  width: 100%;
+  border: 1.3px solid #757575;
+  padding: 16px 24px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.order-result {
+  font-family: "Smythe", cursive;
+  text-align: center;
+  color: #065f46;
+  padding: 52px 60px;
+  border-radius: 3px;
+  background-color: #ecfdf5;
+  font-size: 2rem;
 }
